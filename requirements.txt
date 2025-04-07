@@ -4,6 +4,5 @@ scikit-learn
 seaborn
 pandas 
 flask 
-os
 ctypes
 tempfile
