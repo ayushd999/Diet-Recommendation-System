@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Diet Recommendation</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Diet Recommendation System</h1>
+        <form id="dietForm">
+            <input type="number" step="any" name="carbs" placeholder="Carbohydrates (g)" required>
+            <input type="number" step="any" name="proteins" placeholder="Proteins (g)" required>
+            <input type="number" step="any" name="fats" placeholder="Fats (g)" required>
+            <input type="number" step="any" name="calories" placeholder="Calories" required>
+            <button type="submit">Get Recommendation</button>
+        </form>
+        <div id="output"></div>
+    </div>
+    <script>
+        document.getElementById('dietForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const data = {
+                carbs: this.carbs.value,
+                proteins: this.proteins.value,
+                fats: this.fats.value,
+                calories: this.calories.value
+            };
+
+            const res = await fetch('/predict', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+
+            const result = await res.json();
+            document.getElementById('output').innerText = result.message || result.error;
+        });
+    </script>
+</body>
+</html>
