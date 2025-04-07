@@ -4,3 +4,4 @@ sklearn
 seaborn
 pandas 
 flask 
+os
