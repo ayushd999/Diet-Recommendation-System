@@ -9,11 +9,11 @@ import tempfile
 
 app = Flask(__name__,
             static_url_path='',
-            static_folder=r"C:\Users\Ayush Das\Desktop\diet_recommendation\static",
-            template_folder=r"C:\Users\Ayush Das\Desktop\diet_recommendation\templates")
+            static_folder=r"static",
+            template_folder=r"templates")
 
 # === Load and prepare data ===
-csv_path = r"C:\Users\Ayush Das\Desktop\diet_recommendation\diet_recommendation_dataset.csv"
+csv_path = r"diet_recommendation_dataset.csv"
 df = pd.read_csv(csv_path)
 
 encoder = LabelEncoder()
@@ -27,7 +27,7 @@ xtrain, xtest, ytrain, ytest = train_test_split(x, y, train_size=0.8, test_size=
 lg.fit(xtrain, ytrain)
 
 # === Load C DLL ===
-dll_path = r"C:\Users\Ayush Das\Desktop\diet_recommendation\diett.dll"
+dll_path = r"diett.dll"
 lib = ctypes.CDLL(dll_path)
 lib.loadCSV.argtypes = [ctypes.c_char_p]
 lib.loadCSV.restype = None
